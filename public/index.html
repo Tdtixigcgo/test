@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>❤️ The Love - Nơi chất chứa yêu thương ❤️</title>
+    <link href="styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <div id="public-wishes-bg"></div>
+    <div class="floating-hearts" id="hearts-container"></div>
+    
+    <div class="container">
+        <h1>❤️ The Love ❤️</h1>
+        <h3>Hãy để lại lời chúc ngọt ngào đến một ai đó...</h3>
+        
+        <div class="wish-form">
+            <div class="form-group">
+                <label for="name">Tên của bạn:</label>
+                <input type="text" id="name" placeholder="Nhập tên của bạn..." required>
+            </div>
+            <div class="form-group">
+                <label for="type">Loại lời chúc:</label>
+                <select id="type">
+                    <option value="general">Lời chúc chung</option>
+                    <option value="love">Lời yêu thương</option>
+                    <option value="friendship">Tình bạn</option>
+                    <option value="encouragement">Động viên</option>
+                    <option value="memory">Kỷ niệm</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="message">Lời chúc:</label>
+                <textarea id="message" placeholder="Viết lời chúc từ trái tim của bạn ở đây..." required></textarea>
+            </div>
+            <button id="submit-btn" type="button"><i class="fas fa-heart"></i> Gửi Lời Chúc</button>
+        </div>
+        
+        <div class="wishes-container">
+            <h2>Những Lời Chúc Ngọt Ngào</h2>
+            <div id="wishes-list">
+                <div class="loading-message">Đang tải lời chúc...</div>
+            </div>
+            <div id="messageList"></div>
+            <div id="messages-list"></div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h3 class="footer-title">❤️ The Love ❤️</h3>
+            <p class="footer-description">
+                Nơi lưu giữ những lời yêu thương!!
+            </p>
+            
+            <div class="footer-stats">
+                <div class="stats-item" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                    <span class="stats-number" id="total-wishes">0</span>
+                    <span class="stats-label">Lời chúc</span>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <a href="#" class="footer-link" onclick="scrollToTop()">
+                    <i class="fas fa-arrow-up"></i> Về đầu trang
+                </a>
+                <a href="#" class="footer-link" onclick="showAbout()">
+                    <i class="fas fa-info-circle"></i> Giới thiệu
+                </a>
+                <a href="#" class="footer-link" onclick="showContact()">
+                    <i class="fas fa-envelope"></i> Liên hệ
+                </a>
+            </div>
+            
+            <div class="footer-info">
+                <div class="copyright">
+                    © COPYRIGHT BEN
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BACK TO TOP BUTTON -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- CONTROL BUTTONS -->
+    <div class="control-buttons">
+        <button id="change-bg" class="control-btn" title="Đổi ảnh nền"><i class="fas fa-image"></i></button>
+        <button id="refresh-btn" class="control-btn" title="Làm mới"><i class="fas fa-sync-alt"></i></button>
+    </div>
+
+    <!-- Thêm phần tử với id="myElement" (ẩn) -->
+    <div id="myElement" style="display:none"></div>
+
+    <!-- MODALS -->
+    <div class="confirmation-modal" id="confirmation-modal">
+        <div class="modal-content">
+            <h3>Gửi lời chúc thành công!</h3>
+            <p>Lời chúc của bạn đã được gửi đi và mọi người có thể xem được.</p>
+            <div class="modal-buttons">
+                <button id="close-modal">Đóng</button>
+                <button id="share-modal">Chia sẻ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ABOUT MODAL -->
+    <div class="info-modal" id="aboutModal">
+        <div class="modal-container">
+            <button class="close-modal" onclick="hideAbout()">&times;</button>
+            <h3>Giới thiệu</h3>
+            <p>Trang web được tạo ra để lưu giữ lại những tình cảm, những lời chúc yêu thương của tập thể lớp 9A.</p>
+            <p>Mỗi lời chúc là một câu chuyện, mỗi chia sẻ là một kỷ niệm đáng nhớ mà chúng ta cùng nhau trải qua trong những năm tháng học trò.</p>
+            <div class="modal-buttons">
+                <button onclick="hideAbout()">Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTACT MODAL -->
+    <div class="info-modal" id="contactModal">
+        <div class="modal-container">
+            <button class="close-modal" onclick="hideContact()">&times;</button>
+            <h3>Liên hệ</h3>
+            <p>Nếu bạn có bất kỳ câu hỏi hoặc góp ý nào, vui lòng liên hệ với admin:</p>
+            <ul style="list-style-type: none; margin: 1rem 0; padding: 0;">
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-envelope"></i> Email: thang28063031@gmail.com</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fas fa-link"></i> Facebook: https://www.facebook.com/chiennthangg.01</li>
+            </ul>
+            <div class="modal-buttons">
+                <button onclick="hideContact()">Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading overlay -->
+    <div id="loading-overlay" style="display:none;">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <script src="app.js"></script>
+    <!-- XÓA hoặc BỎ ĐOẠN SCRIPT PHÁT NHẠC ở đây để tránh xung đột với app.js -->
+</body>
+</html>
